@@ -1,6 +1,6 @@
 // @desc    Error Handling Middleware
 // @route   Middleware
-exports.errorHandler = (err, req, res, next) => {
+const errorHandler = (err, req, res, next) => {
   let error = { ...err };
   error.message = err.message;
 
@@ -31,4 +31,4 @@ exports.errorHandler = (err, req, res, next) => {
   });
 };
 
-module.exports = exports.errorHandler;
+module.exports = errorHandler;

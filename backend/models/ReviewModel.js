@@ -14,8 +14,7 @@ const ReviewSchema = new mongoose.Schema(
     },
     order: {
       type: mongoose.Schema.ObjectId,
-      ref: 'Order',
-      required: true
+      ref: 'Order'
     },
     rating: {
       type: Number,
@@ -41,7 +40,7 @@ const ReviewSchema = new mongoose.Schema(
     ],
     isVerifiedPurchase: {
       type: Boolean,
-      default: true
+      default: false
     },
     helpful: {
       type: Number,
@@ -54,7 +53,7 @@ const ReviewSchema = new mongoose.Schema(
     status: {
       type: String,
       enum: ['pending', 'approved', 'rejected'],
-      default: 'pending'
+      default: 'approved'
     },
     rejectionReason: String,
     sellerResponse: {
@@ -69,5 +68,6 @@ const ReviewSchema = new mongoose.Schema(
 ReviewSchema.index({ product: 1, status: 1 });
 ReviewSchema.index({ user: 1 });
 ReviewSchema.index({ order: 1 });
+ReviewSchema.index({ rating: -1, createdAt: -1 });
 
 module.exports = mongoose.model('Review', ReviewSchema);

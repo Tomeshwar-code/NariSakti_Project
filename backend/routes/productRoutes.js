@@ -1,18 +1,22 @@
 const express = require('express');
 const router = express.Router();
 const { protect } = require('../middleware/authMiddleware');
+const { sellerOnly } = require('../middleware/sellerMiddleware');
 
-// Product routes will be implemented here
-// GET    /api/products - Get all products
-// GET    /api/products/:id - Get single product
-// POST   /api/products - Create product (seller only)
-// PUT    /api/products/:id - Update product (seller only)
-// DELETE /api/products/:id - Delete product (seller only)
-// GET    /api/products/search - Search products
-// POST   /api/products/:id/like - Add to wishlist
+const {
+  getProducts,
+  getProduct,
+  createProduct,
+  updateProduct,
+  deleteProduct,
+} = require("../controllers/productController");
 
-router.get('/', (req, res) => {
-  res.json({ message: 'Product routes coming soon' });
-});
+router.route("/").get(getProducts).post(protect, sellerOnly, createProduct);
+
+router
+  .route("/:id")
+  .get(getProduct)
+  .put(protect, sellerOnly, updateProduct)
+  .delete(protect, sellerOnly, deleteProduct);
 
 module.exports = router;
