@@ -4,8 +4,8 @@
   "description": "NariSakti - Rural Women E-Commerce Platform Backend",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js",
+    "start": "node backend/server.js",
+    "dev": "nodemon backend/server.js",
     "test": "jest --coverage"
   },
   "repository": {

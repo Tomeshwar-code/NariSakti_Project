@@ -5,5 +5,73 @@
 }
 
 body {
+  min-height: 100vh;
   font-family: Arial, sans-serif;
+  background: #f7f7fb;
+  color: #232323;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.auth-page,
+.profile-page {
+  max-width: 520px;
+  margin: 36px auto;
+  padding: 32px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+}
+
+.auth-form {
+  display: grid;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.auth-form input,
+.auth-form button {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid #d6d6e7;
+  font-size: 15px;
+}
+
+.auth-form input {
+  background: #fafafa;
+}
+
+.auth-form button {
+  background: #7c3aed;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.auth-form button:hover {
+  background: #5b21b6;
+}
+
+.auth-status {
+  margin-top: 18px;
+  color: #334155;
+}
+
+.profile-page a {
+  color: #7c3aed;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.profile-page a:hover {
+  text-decoration: underline;
 }

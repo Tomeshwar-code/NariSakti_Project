@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { login } from '../../services/authServices';
 
 function Login() {
   const [formData, setFormData] = useState({
     email: '',
-    password: '',
+    password: ''
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     });
   };
 
@@ -20,18 +22,14 @@ function Login() {
     try {
       const data = await login(formData);
 
-      localStorage.setItem(
-        'accessToken',
-        data.accessToken
-      );
+      localStorage.setItem('accessToken', data.accessToken);
+      localStorage.setItem('user', JSON.stringify(data.user));
 
       alert('Login Successful');
-      console.log(data);
+      navigate('/');
+      window.location.reload();
     } catch (error) {
-      alert(
-        error.response?.data?.message ||
-          'Login Failed'
-      );
+      alert(error.response?.data?.message || 'Login Failed');
     }
   };
 
@@ -39,7 +37,9 @@ function Login() {
     <form onSubmit={handleSubmit}>
       <input
         name="email"
+        type="email"
         placeholder="Email"
+        value={formData.email}
         onChange={handleChange}
       />
 
@@ -47,18 +47,13 @@ function Login() {
         name="password"
         type="password"
         placeholder="Password"
+        value={formData.password}
         onChange={handleChange}
       />
 
-      <button type="submit">
-        Login
-      </button>
+      <button type="submit">Login</button>
     </form>
   );
-  localStorage.setItem(
-  'accessToken',
-  data.accessToken
-);
 }
 
 export default Login;

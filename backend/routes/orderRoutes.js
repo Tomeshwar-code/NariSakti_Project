@@ -1,17 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const { protect } = require('../middleware/authMiddleware');
+const {
+  getOrders,
+  getOrder,
+  createOrder,
+  updateOrder,
+  cancelOrder,
+  requestReturn
+} = require('../controllers/orderController');
 
-// Order routes will be implemented here
-// GET    /api/orders - Get user orders
-// GET    /api/orders/:id - Get single order
-// POST   /api/orders - Create order
-// PUT    /api/orders/:id - Update order
-// POST   /api/orders/:id/cancel - Cancel order
-// POST   /api/orders/:id/return - Request return
-
-router.get('/', protect, (req, res) => {
-  res.json({ message: 'Order routes coming soon' });
-});
+router.get('/', protect, getOrders);
+router.get('/:id', protect, getOrder);
+router.post('/', protect, createOrder);
+router.put('/:id', protect, updateOrder);
+router.post('/:id/cancel', protect, cancelOrder);
+router.post('/:id/return', protect, requestReturn);
 
 module.exports = router;
