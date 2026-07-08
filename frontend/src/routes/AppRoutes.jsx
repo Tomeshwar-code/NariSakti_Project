@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import HomePage from "../pages/Home/HomePage";
 import Login from "../pages/Auth/Login";
@@ -23,6 +23,7 @@ import CartPage from "../pages/Cart/CartPage";
 import CheckoutPage from "../pages/Checkout/CheckoutPage";
 import OrdersPage from "../pages/Orders/OrdersPage";
 import AdminRoute from "../routes/AdminRoute";
+import SellerRoute from "../routes/SellerRoute";
 import AdminLayout from "../layouts/AdminLayout";
 import MainLayout from "../layouts/MainLayout";
 import SellerLayout from "../layouts/SellerLayout";
@@ -50,7 +51,8 @@ function AppRoutes() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/orders" element={<OrdersPage />} />
-        <Route path="/seller" element={<SellerLayout />}>
+        <Route path="/seller" element={<SellerRoute><SellerLayout /></SellerRoute>}>
+          <Route index element={<Navigate to="dashboard" replace />} />
           <Route path="add-product" element={<AddProduct />} />
           <Route path="dashboard" element={<SellerDashboard />} />
           <Route path="products" element={<MyProduct />} />

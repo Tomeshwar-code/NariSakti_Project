@@ -1,5 +1,7 @@
 const Product = require("../models/ProductModel");
 
+const defaultCategoryId = "000000000000000000000000";
+
 // Get All Products
 exports.getProducts = async (req, res) => {
   try {
@@ -45,7 +47,17 @@ exports.getProduct = async (req, res) => {
 // Create Product
 exports.createProduct = async (req, res) => {
   try {
-    const product = await Product.create(req.body);
+    const payload = { ...req.body };
+
+    if (!payload.seller && (req.user?.id || req.user?._id)) {
+      payload.seller = req.user.id || req.user._id;
+    }
+
+    if (!payload.category) {
+      payload.category = defaultCategoryId;
+    }
+
+    const product = await Product.create(payload);
 
     res.status(201).json({
       success: true,
@@ -62,13 +74,26 @@ exports.createProduct = async (req, res) => {
 // Update Product
 exports.updateProduct = async (req, res) => {
   try {
-    const product = await Product.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      {
-        new: true,
-      }
-    );
+    const existing = await Product.findById(req.params.id);
+
+    if (!existing) {
+      return res.status(404).json({
+        success: false,
+        message: "Product not found",
+      });
+    }
+
+    if (req.user && req.user.role !== "admin" && String(existing.seller) !== String(req.user.id || req.user._id)) {
+      return res.status(403).json({
+        success: false,
+        message: "You can only update your own products",
+      });
+    }
+
+    const payload = { ...req.body };
+    delete payload.seller;
+
+    const product = await Product.findByIdAndUpdate(req.params.id, payload, { new: true });
 
     res.status(200).json({
       success: true,
@@ -85,6 +110,22 @@ exports.updateProduct = async (req, res) => {
 // Delete Product
 exports.deleteProduct = async (req, res) => {
   try {
+    const existing = await Product.findById(req.params.id);
+
+    if (!existing) {
+      return res.status(404).json({
+        success: false,
+        message: "Product not found",
+      });
+    }
+
+    if (req.user && req.user.role !== "admin" && String(existing.seller) !== String(req.user.id || req.user._id)) {
+      return res.status(403).json({
+        success: false,
+        message: "You can only delete your own products",
+      });
+    }
+
     await Product.findByIdAndDelete(req.params.id);
 
     res.status(200).json({

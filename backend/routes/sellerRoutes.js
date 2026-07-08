@@ -1,16 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const { protect, authorize } = require('../middleware/authMiddleware');
+const { protect } = require('../middleware/authMiddleware');
+const { sellerOnly } = require('../middleware/sellerMiddleware');
+const sellerController = require('../controllers/sellerController');
 
-// Seller routes will be implemented here
-// GET    /api/sellers - Get all sellers
-// GET    /api/sellers/:id - Get seller profile
-// PUT    /api/sellers/profile - Update seller profile
-// GET    /api/sellers/dashboard - Seller dashboard
-// GET    /api/sellers/sales - Get seller sales
+// Public - list sellers
+router.get('/', sellerController.getSellers);
 
-router.get('/', (req, res) => {
-  res.json({ message: 'Seller routes coming soon' });
-});
+// Public - seller profile and products
+router.get('/:id', sellerController.getSellerById);
+
+// Protected seller routes
+router.put('/profile', protect, sellerOnly, sellerController.updateSellerProfile);
+router.get('/dashboard', protect, sellerOnly, sellerController.getDashboard);
+router.get('/sales', protect, sellerOnly, sellerController.getSales);
 
 module.exports = router;
