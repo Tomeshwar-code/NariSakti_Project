@@ -17,6 +17,7 @@ const reviewRoutes = require('./routes/reviewRoutes');
 // Import middleware
 const errorMiddleware = require('./middleware/errorMiddleware');
 
+
 const app = express();
 
 // ============== Security Middleware ==============
@@ -67,7 +68,6 @@ app.use('/api/orders', orderRoutes);
 app.use('/api/sellers', sellerRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/reviews', reviewRoutes);
-
 // ============== 404 Handler ==============
 app.use((req, res) => {
   res.status(404).json({
