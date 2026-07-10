@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { login } from '../../services/authServices';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { login } from "../../services/authServices";
+import "./Login.css";
 
 function Login() {
   const [formData, setFormData] = useState({
-    email: '',
-    password: ''
+    email: "",
+    password: "",
   });
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -22,37 +24,56 @@ function Login() {
     try {
       const data = await login(formData);
 
-      localStorage.setItem('accessToken', data.accessToken);
-      localStorage.setItem('user', JSON.stringify(data.user));
+      localStorage.setItem("accessToken", data.accessToken);
+      localStorage.setItem("user", JSON.stringify(data.user));
 
-      alert('Login Successful');
-      navigate('/');
+      alert("Login Successful");
+      navigate("/");
       window.location.reload();
     } catch (error) {
-      alert(error.response?.data?.message || 'Login Failed');
+      alert(error.response?.data?.message || "Login Failed");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        name="email"
-        type="email"
-        placeholder="Email"
-        value={formData.email}
-        onChange={handleChange}
-      />
+    <div className="login-container">
+      <div className="login-card">
 
-      <input
-        name="password"
-        type="password"
-        placeholder="Password"
-        value={formData.password}
-        onChange={handleChange}
-      />
+        <h2>Welcome Back</h2>
+        <p>Login to your NariSakti account</p>
 
-      <button type="submit">Login</button>
-    </form>
+        <form onSubmit={handleSubmit}>
+
+          <div className="form-group">
+            <label>Email Address</label>
+            <input
+              name="email"
+              type="email"
+              placeholder="Enter your email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Password</label>
+            <input
+              name="password"
+              type="password"
+              placeholder="Enter your password"
+              value={formData.password}
+              onChange={handleChange}
+            />
+          </div>
+
+          <button type="submit">
+            Login
+          </button>
+
+        </form>
+
+      </div>
+    </div>
   );
 }
 
