@@ -1,15 +1,73 @@
 const Product = require("../models/ProductModel");
+const Category = require("../models/CategoryModel");
+const mongoose = require("mongoose");
 
 const defaultCategoryId = "000000000000000000000000";
 
 // Get All Products
 exports.getProducts = async (req, res) => {
   try {
-    const products = await Product.find();
+    const {
+      keyword,
+      category,
+      sort,
+      page = 1,
+      limit = 20,
+    } = req.query;
+
+    const query = { isActive: true };
+
+    if (keyword) {
+      const searchRegex = new RegExp(keyword.trim(), "i");
+      query.$or = [
+        { name: searchRegex },
+        { description: searchRegex },
+        { metaKeywords: searchRegex },
+      ];
+    }
+
+    if (category) {
+      if (mongoose.Types.ObjectId.isValid(category)) {
+        query.category = category;
+      } else {
+        const categoryRegex = new RegExp(`^${category.trim()}$`, "i");
+        const selectedCategory = await Category.findOne({
+          $or: [
+            { slug: categoryRegex },
+            { name: categoryRegex },
+          ],
+          isActive: true,
+        });
+
+        if (!selectedCategory) {
+          return res.status(200).json({
+            success: true,
+            count: 0,
+            total: 0,
+            products: [],
+          });
+        }
+
+        query.category = selectedCategory._id;
+      }
+    }
+
+    const resultLimit = Number(limit) || 20;
+    const currentPage = Number(page) || 1;
+    const skip = resultLimit * (currentPage - 1);
+    const sortBy = sort ? sort.split(",").join(" ") : "-createdAt";
+
+    const products = await Product.find(query)
+      .populate("category", "name slug")
+      .sort(sortBy)
+      .limit(resultLimit)
+      .skip(skip);
+    const totalProducts = await Product.countDocuments(query);
 
     res.status(200).json({
       success: true,
       count: products.length,
+      total: totalProducts,
       products,
     });
   } catch (error) {

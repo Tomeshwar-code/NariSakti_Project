@@ -13,6 +13,9 @@ const orderRoutes = require('./routes/orderRoutes');
 const sellerRoutes = require('./routes/sellerRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
+const footerRoutes = require('./routes/footerRoutes');
+const invoiceRoutes = require('./routes/invoiceRoutes');
+const walletRoutes = require('./routes/walletRoutes');
 
 // Import middleware
 const errorMiddleware = require('./middleware/errorMiddleware');
@@ -68,6 +71,9 @@ app.use('/api/orders', orderRoutes);
 app.use('/api/sellers', sellerRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/reviews', reviewRoutes);
+app.use('/api/footer', footerRoutes);
+app.use('/api/invoices', invoiceRoutes);
+app.use('/api/wallet', walletRoutes);
 // ============== 404 Handler ==============
 app.use((req, res) => {
   res.status(404).json({

@@ -1,64 +1,13 @@
-/* Home page product grid and card styling */
-
-.home-page {
-	padding: 24px;
-}
-
-.home-page h1 {
-	text-align: left;
-	margin-bottom: 18px;
-	color: #111827;
-}
-
-.product-grid {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-	gap: 18px;
-	align-items: stretch;
-}
-
-.card {
-	background: #ffffff;
-	border-radius: 12px;
-	box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
-	padding: 12px;
-	display: flex;
-	flex-direction: column;
-	gap: 8px;
-}
-
-.card img {
-	width: 100%;
-	height: 160px;
-	object-fit: cover;
-	border-radius: 8px;
-}
-
-.card h3 {
-	margin: 0;
-	font-size: 16px;
-	color: #0f172a;
-}
-
-.card p {
-	margin: 0;
-	color: #374151;
-	font-weight: 600;
-}
-
-.card a {
-	margin-top: auto;
-	display: inline-block;
-	padding: 8px 10px;
-	background: #7c3aed;
-	color: white;
-	text-decoration: none;
-	border-radius: 8px;
-	text-align: center;
-}
-
-@media (max-width: 640px) {
-	.card img {
-		height: 140px;
-	}
-}
+.home-page { padding: clamp(.5rem, 2vw, 1.25rem) 0; }
+.home-page h1 { position: relative; width: fit-content; margin-bottom: 1.6rem; }
+.home-page h1::after { content: ""; position: absolute; left: 0; bottom: -.55rem; width: 62%; height: 4px; border-radius: 4px; background: linear-gradient(90deg, var(--color-primary), var(--color-accent)); }
+.product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.35rem; }
+.product-grid .card { display: flex; flex-direction: column; gap: .8rem; padding: .7rem; overflow: hidden; transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+.product-grid .card:hover { transform: translateY(-6px); border-color: #e3b5c3; box-shadow: var(--shadow-lg); }
+.product-grid .card img { width: 100%; height: 205px; object-fit: cover; border-radius: 11px; background: var(--color-surface-alt); transition: transform .35s ease; }
+.product-grid .card:hover img { transform: scale(1.025); }
+.product-grid .card h3 { margin: .1rem .35rem 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.product-grid .card p { margin: 0 .35rem; color: var(--color-primary); font-size: 1.1rem; font-weight: 800; }
+.product-grid .card a { display: block; margin: auto .35rem .3rem; padding: .65rem; border-radius: 9px; background: var(--color-primary-soft); color: var(--color-primary); text-align: center; text-decoration: none; font-size: .88rem; font-weight: 700; transition: .2s ease; }
+.product-grid .card a:hover { background: var(--color-primary); color: #fff; }
+@media (max-width: 550px) { .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; } .product-grid .card img { height: 145px; } .product-grid .card h3 { font-size: .92rem; } }

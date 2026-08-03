@@ -120,6 +120,10 @@ const UserSchema = new mongoose.Schema(
       type: Number,
       default: 0
     },
+    walletBalance: {
+      type: Number,
+      default: 0
+    },
     
     lastLogin: Date
   },

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   createReview,
@@ -15,13 +15,7 @@ const ProductReviews = ({ productId }) => {
   const navigate = useNavigate();
   const token = localStorage.getItem("accessToken");
 
-  useEffect(() => {
-    if (productId) {
-      fetchReviews();
-    }
-  }, [productId]);
-
-  const fetchReviews = async () => {
+  const fetchReviews = useCallback(async () => {
     try {
       setLoading(true);
       const res = await getProductReviews(productId);
@@ -31,7 +25,13 @@ const ProductReviews = ({ productId }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [productId]);
+
+  useEffect(() => {
+    if (productId) {
+      fetchReviews();
+    }
+  }, [productId, fetchReviews]);
 
   const handleInputChange = event => {
     const { name, value } = event.target;

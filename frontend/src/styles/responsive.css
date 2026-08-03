@@ -1,0 +1,14 @@
+@media(min-width:640px){
+  .main-grid{grid-template-columns: repeat(12,1fr)}
+}
+@media(min-width:768px){
+  .main-grid{grid-template-columns: repeat(12,1fr)}
+}
+@media(min-width:1024px){
+  .main-grid{grid-template-columns: repeat(12,1fr)}
+  .dashboard-grid{grid-template-columns: 260px 1fr}
+}
+
+/* responsive helpers */
+.hide-sm{display:none}
+@media(min-width:768px){.hide-sm{display:block}}

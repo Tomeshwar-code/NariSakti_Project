@@ -1,0 +1,20 @@
+/* Spacing helpers */
+.u-mt-sm{margin-top:var(--space-sm)}
+.u-mt-md{margin-top:var(--space-md)}
+.u-mb-md{margin-bottom:var(--space-md)}
+.u-p-sm{padding:var(--space-sm)}
+.u-p-md{padding:var(--space-md)}
+
+/* Text utilities */
+.text-muted{color:var(--color-muted)}
+.text-center{text-align:center}
+.text-right{text-align:right}
+
+/* Layout helpers */
+.flex{display:flex}
+.items-center{align-items:center}
+.justify-between{justify-content:space-between}
+.gap-sm{gap:var(--space-sm)}
+
+/* Visually hidden (accessibility) */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}

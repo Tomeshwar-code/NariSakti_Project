@@ -39,6 +39,50 @@ exports.getUsers = async (req, res) => {
   }
 };
 
+// PUT /api/admin/users/:id/role
+exports.updateUserRole = async (req, res) => {
+  try {
+    const { role } = req.body;
+    const allowedRoles = ['user', 'seller', 'admin'];
+
+    if (!allowedRoles.includes(role)) {
+      return res.status(400).json({
+        success: false,
+        message: 'Role must be one of: user, seller, admin'
+      });
+    }
+
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'User not found' });
+    }
+
+    if (String(user._id) === String(req.user._id) && role !== 'admin') {
+      return res.status(400).json({
+        success: false,
+        message: 'You cannot remove your own admin role'
+      });
+    }
+
+    user.role = role;
+
+    if (role !== 'seller') {
+      user.isSellerVerified = false;
+    }
+
+    await user.save();
+
+    const updatedUser = await User.findById(user._id).select('-password');
+    res.status(200).json({
+      success: true,
+      message: 'User role updated successfully',
+      user: updatedUser
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
 // GET /api/admin/products
 exports.getProducts = async (req, res) => {
   try {

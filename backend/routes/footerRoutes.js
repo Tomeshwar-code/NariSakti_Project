@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const footerController = require('../controllers/footerController');
-const { authenticate, authorize } = require('../middleware/authMiddleware'); // We'll create this
+const { protect, authorize } = require('../middleware/authMiddleware');
 
 // ============== Public Routes ==============
 
@@ -20,23 +20,23 @@ router.get('/social-media', footerController.getSocialMedia);
 
 // ============== Protected Routes (Admin Only) ==============
 
-router.put(
+router.get(
   '/newsletter/stats',
-  authenticate,
+  protect,
   authorize('admin'),
   footerController.getNewsletterStats
 );
 
 router.put(
   '/content/:section',
-  authenticate,
+  protect,
   authorize('admin'),
   footerController.updateFooterContent
 );
 
 router.put(
   '/site-info',
-  authenticate,
+  protect,
   authorize('admin'),
   footerController.updateSiteInfo
 );
