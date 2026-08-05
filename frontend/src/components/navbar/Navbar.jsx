@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import VoiceAssistant from "../common/VoiceAssistant";
 import "./Navbar.css";
 
 function Navbar() {
@@ -10,7 +11,7 @@ function Navbar() {
     try {
       const storedUser = JSON.parse(localStorage.getItem("user") || "null");
       setUser(storedUser);
-    } catch (error) {
+    } catch {
       setUser(null);
     }
   }, []);
@@ -47,6 +48,7 @@ function Navbar() {
 
         {/* Right Menu */}
         <div className="header-right">
+          <VoiceAssistant />
 
           {!user ? (
             <>

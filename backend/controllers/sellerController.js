@@ -95,4 +95,10 @@ exports.getSales = async (req, res) => {
   }
 };
 
-module.exports = exports;
+module.exports = {
+  getSellers: exports.getSellers,
+  getSellerById: exports.getSellerById,
+  updateSellerProfile: exports.updateSellerProfile,
+  getDashboard: exports.getDashboard,
+  getSales: exports.getSales
+};

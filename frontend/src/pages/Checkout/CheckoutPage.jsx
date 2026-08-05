@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { createOrder } from '../../services/orderServices';
 import { useNavigate } from 'react-router-dom';
 
@@ -18,7 +18,7 @@ const CheckoutPage = () => {
         shippingAddress: address,
         paymentMethod: 'cod'
       };
-      const res = await createOrder(orderData);
+      await createOrder(orderData);
       localStorage.removeItem('cart');
       navigate(`/orders`);
     } catch (err) {

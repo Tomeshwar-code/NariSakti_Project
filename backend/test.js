@@ -1,24 +1,20 @@
-const mongoose = require('mongoose');
-const User = require('./models/UserModel');
+const request = require('supertest');
+const app = require('./app');
 
-mongoose.connect('mongodb://127.0.0.1:27017/narisakti');
+describe('NariSakti API', () => {
+  test('returns health check status', async () => {
+    const response = await request(app).get('/api/health');
 
-async function test() {
-  try {
-    const user = await User.create({
-      firstName: 'ram',
-      lastName: 'Sahu',
-      email: 'ram@gmail.com',
-      phone: '9801234567',
-      password: '987654'
-    });
+    expect(response.statusCode).toBe(200);
+    expect(response.body.status).toBe('success');
+    expect(response.body.message).toBe('NariSakti API is running!');
+  });
 
-    console.log(user);
-  } catch (error) {
-    console.log(error.message);
-  }
+  test('returns a clear 404 for unknown routes', async () => {
+    const response = await request(app).get('/api/unknown-route');
 
-  process.exit();
-}
-
-test();
+    expect(response.statusCode).toBe(404);
+    expect(response.body.status).toBe('error');
+    expect(response.body.message).toBe('Route not found');
+  });
+});

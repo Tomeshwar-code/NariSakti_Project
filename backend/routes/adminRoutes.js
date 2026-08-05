@@ -6,6 +6,7 @@ const adminController = require('../controllers/adminController');
 // Admin routes
 router.get('/dashboard', protect, authorize('admin'), adminController.getDashboard);
 router.get('/users', protect, authorize('admin'), adminController.getUsers);
+router.put('/users/:id/role', protect, authorize('admin'), adminController.updateUserRole);
 router.get('/products', protect, authorize('admin'), adminController.getProducts);
 router.put('/products/:id/approve', protect, authorize('admin'), adminController.approveProduct);
 router.put('/products/:id/reject', protect, authorize('admin'), adminController.rejectProduct);

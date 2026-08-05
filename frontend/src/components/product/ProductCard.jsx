@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
   return (
-    <div className="card">
+    <article className="card product-card">
       <img
         src={product.images[0]?.url}
         alt={product.name}
@@ -15,7 +15,7 @@ const ProductCard = ({ product }) => {
       <Link to={`/product/${product._id}`}>
         View
       </Link>
-    </div>
+    </article>
   );
 };
 

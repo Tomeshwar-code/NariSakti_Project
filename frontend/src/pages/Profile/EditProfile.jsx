@@ -29,7 +29,7 @@ function EditProfile() {
           pincode: user.address?.pincode || '',
           country: user.address?.country || ''
         });
-      } catch (error) {
+      } catch {
         setStatus('Unable to load profile');
       }
     };

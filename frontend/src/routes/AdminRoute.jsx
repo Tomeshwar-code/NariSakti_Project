@@ -1,4 +1,3 @@
-import React from 'react';
 import { Navigate } from 'react-router-dom';
 
 const AdminRoute = ({ children }) => {
@@ -8,7 +7,7 @@ const AdminRoute = ({ children }) => {
       return <Navigate to="/login" replace />;
     }
     return children;
-  } catch (err) {
+  } catch {
     return <Navigate to="/login" replace />;
   }
 };

@@ -1,12 +1,15 @@
 {
-  "name": "narisakti-backend",
+  "name": "narisakti-project",
+  "private": true,
   "version": "1.0.0",
   "description": "NariSakti - Rural Women E-Commerce Platform Backend",
   "main": "server.js",
   "scripts": {
     "start": "node backend/server.js",
     "dev": "nodemon backend/server.js",
-    "test": "jest --coverage"
+    "test:backend": "npm --prefix backend test",
+    "test:frontend": "npm --prefix frontend test",
+    "test": "npm run test:backend"
   },
   "repository": {
     "type": "git",

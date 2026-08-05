@@ -1,6 +1,6 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaYoutube, FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
+import api from '../../api/axios';
 import './Footer.css';
 
 const Footer = () => {
@@ -157,24 +157,12 @@ const handleNewsletterSubscribe = async (e) => {
   const email = e.target.querySelector('.newsletter-input').value;
   
   try {
-    const response = await fetch('http://localhost:5000/api/newsletter/subscribe', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email }),
-    });
-
-    const data = await response.json();
-    if (response.ok) {
-      alert('Successfully subscribed to our newsletter!');
-      e.target.reset();
-    } else {
-      alert(data.message || 'Failed to subscribe');
-    }
+    const response = await api.post('/footer/newsletter/subscribe', { email });
+    alert(response.data?.message || 'Successfully subscribed to our newsletter!');
+    e.target.reset();
   } catch (error) {
     console.error('Error subscribing to newsletter:', error);
-    alert('Error subscribing to newsletter');
+    alert(error.response?.data?.message || 'Error subscribing to newsletter');
   }
 };
 

@@ -1,0 +1,10 @@
+/* Header / Nav */
+.site-header{background:linear-gradient(90deg, rgba(124,58,237,0.06), rgba(249,115,22,0.03));padding:12px 0;border-bottom:1px solid var(--color-border)}
+.site-nav{display:flex;align-items:center;justify-content:space-between}
+.site-logo{font-weight:800;color:var(--color-primary);font-size:1.125rem}
+
+/* Main content layout */
+.main-grid{display:grid;grid-template-columns: 1fr;gap:var(--space-lg)}
+.dashboard-grid{display:grid;grid-template-columns: 260px 1fr;gap:var(--space-lg)}
+
+.page-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-md)}

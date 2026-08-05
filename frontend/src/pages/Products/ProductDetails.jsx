@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getProduct } from "../../services/productServices";
 import ProductReviews from "../../components/product/ProductReviews";
@@ -9,20 +9,20 @@ const ProductDetails = () => {
   const [product, setProduct] = useState(null);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    if (id) {
-      fetchProduct();
-    }
-  }, [id]);
-
-  const fetchProduct = async () => {
+  const fetchProduct = useCallback(async () => {
     try {
       const res = await getProduct(id);
       setProduct(res.data.product);
     } catch (err) {
       setError(err.response?.data?.message || "Unable to load product.");
     }
-  };
+  }, [id]);
+
+  useEffect(() => {
+    if (id) {
+      fetchProduct();
+    }
+  }, [id, fetchProduct]);
 
   if (error) {
     return <h2>{error}</h2>;

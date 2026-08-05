@@ -18,12 +18,14 @@ const ProductList = () => {
     <div>
       <h1>All Products</h1>
 
-      {products.map((product) => (
-        <ProductCard
-          key={product._id}
-          product={product}
-        />
-      ))}
+      <div className="product-grid">
+        {products.map((product) => (
+          <ProductCard
+            key={product._id}
+            product={product}
+          />
+        ))}
+      </div>
     </div>
   );
 };

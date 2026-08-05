@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getMe } from '../../services/authServices';
+import WalletWidget from '../../components/common/WalletWidget';
+import WhatsAppWidget from '../../components/common/WhatsAppWidget';
 
 function Profile() {
   const [user, setUser] = useState(null);
@@ -13,7 +15,7 @@ function Profile() {
       const data = await getMe();
       setUser(data.user);
     } catch (error) {
-      console.log(error.response?.data);
+      console.error(error.response?.data || error);
     }
   };
 
@@ -22,17 +24,24 @@ function Profile() {
   }
 
   return (
-    <div className="profile-page">
-      <h2>My Profile</h2>
-      <p>
-        Name: {user.firstName} {user.lastName}
-      </p>
-      <p>Email: {user.email}</p>
-      <p>Phone: {user.phone}</p>
-      <p>Role: {user.role}</p>
-      <div style={{ marginTop: 20, display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-        <a href="/profile/edit">Edit Profile</a>
-        <a href="/profile/change-password">Change Password</a>
+    <div className="profile-page profile-page--grid">
+      <div className="profile-card glass-panel">
+        <h2>My Profile</h2>
+        <p>
+          Name: {user.firstName} {user.lastName}
+        </p>
+        <p>Email: {user.email}</p>
+        <p>Phone: {user.phone}</p>
+        <p>Role: {user.role}</p>
+        <div className="profile-actions" style={{ marginTop: 20 }}>
+          <a href="/profile/edit" className="btn btn-ghost">Edit Profile</a>
+          <a href="/profile/change-password" className="btn btn-ghost">Change Password</a>
+        </div>
+      </div>
+
+      <div className="profile-sidebar">
+        <WalletWidget />
+        <WhatsAppWidget />
       </div>
     </div>
   );

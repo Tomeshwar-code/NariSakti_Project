@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getAdminProducts, approveProduct, rejectProduct } from '../../services/adminServices';
 
 const Products = () => {

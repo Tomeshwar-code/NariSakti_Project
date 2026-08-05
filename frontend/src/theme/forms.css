@@ -1,0 +1,41 @@
+.form-group { display: grid; gap: 0.5rem; margin-bottom: 1.15rem; }
+
+.form-label { font-size: 0.92rem; font-weight: 600; color: var(--color-ink); }
+
+.input-field,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+select,
+textarea {
+  width: 100%;
+  padding: 0.95rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background: #fff;
+  color: var(--color-ink);
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.input-field:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px rgba(159, 45, 79, .08);
+}
+
+.input-field::placeholder,
+textarea::placeholder {
+  color: var(--color-muted);
+}
+
+.input-error { border-color: var(--color-error); }
+
+.input-help { font-size: 0.82rem; color: var(--color-muted); }
+
+.form-actions { display: flex; flex-wrap: wrap; gap: 0.85rem; align-items: center; margin-top: 1rem; }
+
+.form-note { color: var(--color-muted); font-size: 0.88rem; }

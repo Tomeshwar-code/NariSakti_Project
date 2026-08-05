@@ -1,14 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const CartPage = () => {
-  const [cart, setCart] = useState([]);
+  const [cart] = useState(() => JSON.parse(localStorage.getItem('cart') || '[]'));
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem('cart') || '[]');
-    setCart(stored);
-  }, []);
 
   const handleCheckout = () => {
     navigate('/checkout');

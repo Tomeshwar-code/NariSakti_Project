@@ -9,3 +9,5 @@ backend/.env
 
 dist/
 build/
+coverage/
+backend/coverage/

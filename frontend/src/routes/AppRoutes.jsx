@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 
 import HomePage from "../pages/Home/HomePage";
 import Login from "../pages/Auth/Login";
@@ -10,6 +10,7 @@ import Profile from "../pages/Profile/Profile";
 import EditProfile from "../pages/Profile/EditProfile";
 import ChangePassword from "../pages/Profile/ChangePassword";
 import Logout from "../pages/Auth/Logout";
+import ProtectedRoutes from "../routes/ProtectedRoutes";
 
 // seller section
 import AddProduct from "../pages/Seller/AddProduct";
@@ -41,16 +42,19 @@ function AppRoutes() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path="/products" element={<ProductsPage />} />
+        <Route path="/category/:categorySlug" element={<ProductsPage />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/profile/edit" element={<EditProfile />} />
-        <Route path="/profile/change-password" element={<ChangePassword />} />
-        <Route path="/logout" element={<Logout />} />
+        <Route element={<ProtectedRoutes><Outlet /></ProtectedRoutes>}>
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/edit" element={<EditProfile />} />
+          <Route path="/profile/change-password" element={<ChangePassword />} />
+          <Route path="/logout" element={<Logout />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/orders" element={<OrdersPage />} />
+        </Route>
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/productlist" element={<ProductList />} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="/checkout" element={<CheckoutPage />} />
-        <Route path="/orders" element={<OrdersPage />} />
         <Route path="/seller" element={<SellerRoute><SellerLayout /></SellerRoute>}>
           <Route index element={<Navigate to="dashboard" replace />} />
           <Route path="add-product" element={<AddProduct />} />

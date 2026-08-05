@@ -1,0 +1,42 @@
+.voice-assistant {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 210px;
+}
+
+.voice-assistant__button {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: #fff;
+  color: var(--color-primary);
+  display: grid;
+  place-items: center;
+  transition: transform var(--transition-base), box-shadow var(--transition-base), background var(--transition-base);
+}
+
+.voice-assistant__button:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.voice-assistant__button.listening {
+  background: var(--color-primary);
+  color: #fff;
+  box-shadow: 0 0 0 8px rgba(159, 45, 79, .12);
+}
+
+.voice-assistant__status {
+  display: flex;
+  gap: 0.45rem;
+  align-items: center;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.voice-assistant__icon {
+  font-size: 1rem;
+  color: var(--color-accent-dark);
+}
