@@ -1,0 +1,165 @@
+.edit-product-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.edit-product-title {
+  margin-top: 0;
+  color: #6d3b00;
+  font-size: 1.8rem;
+}
+
+.edit-product-form {
+  display: grid;
+  gap: 16px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #5a3e1b;
+  font-size: 0.9rem;
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  border: 1px solid #e8d5b0;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 14px;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  border-color: #ff8c42;
+  box-shadow: 0 0 0 3px rgba(255, 140, 66, 0.15);
+}
+
+.form-textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.input-error {
+  border-color: #e5534b;
+  background: #fff5f5;
+}
+
+.error-text {
+  color: #e5534b;
+  font-size: 0.8rem;
+  margin-top: 2px;
+}
+
+.two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.image-upload-section {
+  border: 2px dashed #e8d5b0;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  color: #8b6b4a;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.image-upload-section:hover {
+  background: #fdf5ec;
+}
+
+.image-preview-list {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.image-preview-item {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid #e8d5b0;
+}
+
+.button-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.btn {
+  border: none;
+  cursor: pointer;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: opacity 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: #ff8c42;
+  color: #fff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #e07b35;
+}
+
+.btn-secondary {
+  background: #f0e5d8;
+  color: #5a3e1b;
+}
+
+.btn-secondary:hover {
+  background: #e2d2bc;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-message {
+  text-align: center;
+  padding: 40px;
+  color: #8b6b4a;
+  font-size: 1.1rem;
+}
